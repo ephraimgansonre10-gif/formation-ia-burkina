@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getAdminConfig } from '@/lib/data'
 
 export async function GET(request: NextRequest) {
   const authHeader = request.headers.get('authorization')
@@ -9,7 +8,7 @@ export async function GET(request: NextRequest) {
   }
 
   const token = authHeader.substring(7)
-  const adminConfig = getAdminConfig()
+  const adminSecret = process.env.ADMIN_SECRET || 'formation-ia-burkina-secret-key-2024'
   
-  return NextResponse.json({ valid: token === adminConfig.secret })
+  return NextResponse.json({ valid: token === adminSecret })
 }

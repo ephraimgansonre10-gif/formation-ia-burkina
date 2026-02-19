@@ -1,8 +1,24 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getContent, getAdminConfig } from '@/lib/data'
+import { supabase } from '@/lib/supabase'
 
 export async function GET() {
-  return NextResponse.json(getContent())
+  try {
+    const { data, error } = await supabase
+      .from('site_content')
+      .select('content')
+      .eq('id', 1)
+      .single()
+
+    if (error) {
+      console.error('Supabase error:', error)
+      return NextResponse.json({ error: 'Erreur de base de données' }, { status: 500 })
+    }
+
+    return NextResponse.json(data?.content || {})
+  } catch (error) {
+    console.error('Error:', error)
+    return NextResponse.json({ error: 'Erreur serveur' }, { status: 500 })
+  }
 }
 
 export async function POST(request: NextRequest) {
@@ -13,25 +29,31 @@ export async function POST(request: NextRequest) {
   }
 
   const token = authHeader.substring(7)
-  const adminConfig = getAdminConfig()
+  const adminSecret = process.env.ADMIN_SECRET || 'formation-ia-burkina-secret-key-2024'
   
-  if (token !== adminConfig.secret) {
+  if (token !== adminSecret) {
     return NextResponse.json({ error: 'Token invalide' }, { status: 401 })
   }
 
   try {
     const newContent = await request.json()
-    const fs = await import('fs')
-    const path = await import('path')
     
-    const dataPath = path.join(process.cwd(), 'data.json')
-    const data = await import('@/lib/data').then(m => m.default)
-    const updatedData = { ...data, content: newContent }
-    
-    fs.writeFileSync(dataPath, JSON.stringify(updatedData, null, 2))
+    const { error } = await supabase
+      .from('site_content')
+      .upsert({
+        id: 1,
+        content: newContent,
+        updated_at: new Date().toISOString()
+      })
+
+    if (error) {
+      console.error('Supabase error:', error)
+      return NextResponse.json({ error: 'Erreur lors de la sauvegarde' }, { status: 500 })
+    }
     
     return NextResponse.json({ success: true })
-  } catch {
-    return NextResponse.json({ error: 'Erreur lors de la sauvegarde' }, { status: 500 })
+  } catch (error) {
+    console.error('Error:', error)
+    return NextResponse.json({ error: 'Erreur serveur' }, { status: 500 })
   }
 }

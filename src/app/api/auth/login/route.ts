@@ -1,14 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getAdminConfig } from '@/lib/data'
 
 export async function POST(request: NextRequest) {
   try {
     const { password } = await request.json()
-    const adminConfig = getAdminConfig()
+    const adminPassword = process.env.ADMIN_PASSWORD || 'admin123'
+    const adminSecret = process.env.ADMIN_SECRET || 'formation-ia-burkina-secret-key-2024'
 
-    if (password === adminConfig.password) {
+    if (password === adminPassword) {
       return NextResponse.json({ 
-        token: adminConfig.secret,
+        token: adminSecret,
         message: 'Connexion réussie' 
       })
     }
