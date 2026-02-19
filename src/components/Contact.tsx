@@ -11,12 +11,7 @@ interface ContactData {
 }
 
 export default function Contact({ data }: { data: ContactData }) {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    message: ''
-  })
+  const [formData, setFormData] = useState({ name: '', email: '', phone: '', message: '' })
   const [submitted, setSubmitted] = useState(false)
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -28,136 +23,103 @@ export default function Contact({ data }: { data: ContactData }) {
     }, 3000)
   }
 
+  const infoItems = [
+    { icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+        <circle cx="12" cy="10" r="3" />
+      </svg>
+    ), title: 'Adresse', value: data.address },
+    { icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
+      </svg>
+    ), title: 'Téléphone', value: data.phone },
+    { icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+        <path d="M22 6l-10 7L2 6" />
+      </svg>
+    ), title: 'Email', value: data.email },
+    { icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <circle cx="12" cy="12" r="10" />
+        <path d="M12 6v6l4 2" />
+      </svg>
+    ), title: 'Horaires', value: data.hours },
+  ]
+
   return (
-    <section id="contact" className="section bg-white">
-      <div className="container">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            <span className="gradient-text">{data.title}</span>
-          </h2>
-          <p className="text-lg text-gray-600">
-            Une question ? N'hésitez pas à nous contacter
-          </p>
+    <section id="contact" className="contact">
+      <div className="section-inner">
+        <div className="section-title">
+          <h2>{data.title}</h2>
+          <p>Une question ? N'hésitez pas à nous contacter</p>
         </div>
-
-        <div className="grid lg:grid-cols-2 gap-12">
-          <div>
-            <div className="card p-8">
-              <h3 className="text-xl font-semibold mb-6">Envoyez-nous un message</h3>
+        
+        <div className="contact-grid">
+          <div className="contact-form">
+            <h3>Envoyez-nous un message</h3>
+            <form onSubmit={handleSubmit}>
+              <div className="form-group">
+                <label>Nom complet</label>
+                <input
+                  type="text"
+                  required
+                  value={formData.name}
+                  onChange={(e) => setFormData({...formData, name: e.target.value})}
+                  placeholder="Votre nom"
+                />
+              </div>
               
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Nom complet</label>
+              <div className="form-row">
+                <div className="form-group">
+                  <label>Email</label>
                   <input
-                    type="text"
+                    type="email"
                     required
-                    value={formData.name}
-                    onChange={(e) => setFormData({...formData, name: e.target.value})}
-                    className="admin-input"
-                    placeholder="Votre nom"
+                    value={formData.email}
+                    onChange={(e) => setFormData({...formData, email: e.target.value})}
+                    placeholder="votre@email.com"
                   />
                 </div>
-                
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                    <input
-                      type="email"
-                      required
-                      value={formData.email}
-                      onChange={(e) => setFormData({...formData, email: e.target.value})}
-                      className="admin-input"
-                      placeholder="votre@email.com"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Téléphone</label>
-                    <input
-                      type="tel"
-                      value={formData.phone}
-                      onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                      className="admin-input"
-                      placeholder="+226 XX XX XX XX"
-                    />
-                  </div>
-                </div>
-                
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Message</label>
-                  <textarea
-                    required
-                    value={formData.message}
-                    onChange={(e) => setFormData({...formData, message: e.target.value})}
-                    className="admin-textarea"
-                    placeholder="Votre message..."
-                    rows={4}
+                <div className="form-group">
+                  <label>Téléphone</label>
+                  <input
+                    type="tel"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                    placeholder="+226 XX XX XX XX"
                   />
                 </div>
-                
-                <button type="submit" className="btn-primary w-full">
-                  {submitted ? 'Message envoyé !' : 'Envoyer le message'}
-                </button>
-              </form>
-            </div>
+              </div>
+              
+              <div className="form-group">
+                <label>Message</label>
+                <textarea
+                  required
+                  value={formData.message}
+                  onChange={(e) => setFormData({...formData, message: e.target.value})}
+                  placeholder="Votre message..."
+                />
+              </div>
+              
+              <button type="submit" className="submit-btn">
+                {submitted ? 'Message envoyé !' : 'Envoyer le message'}
+              </button>
+            </form>
           </div>
-
-          <div className="space-y-6">
-            <div className="card p-6">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full gradient-bg flex items-center justify-center text-white">
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                  </svg>
-                </div>
+          
+          <div className="contact-info">
+            {infoItems.map((item, index) => (
+              <div key={index} className="info-card">
+                <div className="info-icon">{item.icon}</div>
                 <div>
-                  <h4 className="font-semibold">Adresse</h4>
-                  <p className="text-gray-600">{data.address}</p>
+                  <h4>{item.title}</h4>
+                  <p>{item.value}</p>
                 </div>
               </div>
-            </div>
-
-            <div className="card p-6">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full gradient-bg flex items-center justify-center text-white">
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                  </svg>
-                </div>
-                <div>
-                  <h4 className="font-semibold">Téléphone</h4>
-                  <p className="text-gray-600">{data.phone}</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="card p-6">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full gradient-bg flex items-center justify-center text-white">
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
-                </div>
-                <div>
-                  <h4 className="font-semibold">Email</h4>
-                  <p className="text-gray-600">{data.email}</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="card p-6">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full gradient-bg flex items-center justify-center text-white">
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <div>
-                  <h4 className="font-semibold">Horaires</h4>
-                  <p className="text-gray-600">{data.hours}</p>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>

@@ -37,49 +37,32 @@ export default function AdminLogin() {
   }
 
   return (
-    <div className="min-h-screen gradient-bg flex items-center justify-center p-4">
-      <div className="bg-white rounded-2xl shadow-xl p-8 w-full max-w-md">
-        <div className="text-center mb-8">
-          <div className="w-16 h-16 mx-auto rounded-full gradient-bg flex items-center justify-center text-white text-2xl font-bold mb-4">
-            IA
-          </div>
-          <h1 className="text-2xl font-bold">Administration</h1>
-          <p className="text-gray-600">Connectez-vous pour gérer le contenu</p>
-        </div>
+    <div className="admin-login">
+      <div className="admin-login-card">
+        <div className="admin-login-logo">IA</div>
+        <h1>Administration</h1>
+        <p>Connectez-vous pour gérer le contenu du site</p>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium mb-1">Mot de passe</label>
+        <form onSubmit={handleSubmit}>
+          <div className="admin-form-group">
+            <label>Mot de passe</label>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="admin-input"
               placeholder="Entrez le mot de passe"
               required
             />
           </div>
 
-          {error && (
-            <div className="p-3 rounded-lg bg-red-100 text-red-700 text-sm">
-              {error}
-            </div>
-          )}
+          {error && <div className="admin-error">{error}</div>}
 
-          <button
-            type="submit"
-            disabled={loading}
-            className="btn-primary w-full"
-          >
+          <button type="submit" className="admin-btn" disabled={loading}>
             {loading ? 'Connexion...' : 'Se connecter'}
           </button>
         </form>
 
-        <div className="mt-6 text-center">
-          <a href="/" className="text-blue-600 hover:underline text-sm">
-            ← Retour au site
-          </a>
-        </div>
+        <a href="/" className="admin-back-link">← Retour au site</a>
       </div>
     </div>
   )

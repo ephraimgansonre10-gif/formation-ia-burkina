@@ -87,8 +87,7 @@
           "features": [
             "Accès à tous les modules",
             "Support pédagogique",
-            "Certificat de fin de formation",
-            "Accès aux ressources en ligne"
+            "Certificat de fin de formation"
           ],
           "popular": false
         },
@@ -101,8 +100,7 @@
             "Tout le plan Standard",
             "Coaching individuel (5h)",
             "Projets avancés",
-            "Accès à vie aux mises à jour",
-            "Réseau d'alumni"
+            "Accès à vie aux mises à jour"
           ],
           "popular": true
         }
@@ -111,7 +109,7 @@
     "contact": {
       "title": "Contactez-nous",
       "address": "Ouagadougou, Burkina Faso",
-      "phone": "+226 70 00 00 00",
+      "phone": "+226 74744940",
       "email": "contact@formation-ia-bf.com",
       "hours": "Lundi - Vendredi: 8h - 18h"
     },
