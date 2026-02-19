@@ -1,0 +1,149 @@
+{
+  "content": {
+    "hero": {
+      "title": "Formation en Intelligence Artificielle",
+      "subtitle": "Maîtrisez l'IA et transformez votre carrière au Burkina Faso",
+      "description": "Une formation complète et pratique pour devenir expert en Intelligence Artificielle. Du machine learning au deep learning, apprenez les compétences les plus recherchées du marché.",
+      "cta": "S'inscrire maintenant"
+    },
+    "about": {
+      "title": "À propos de la formation",
+      "description": "Notre formation en IA est conçue pour les professionnels burkinabè qui souhaitent acquérir des compétences de pointe en intelligence artificielle. Avec des projets pratiques et un accompagnement personnalisé.",
+      "features": [
+        {
+          "icon": "graduation-cap",
+          "title": "Formation Certifiante",
+          "description": "Obtenez un certificat reconnu à la fin de votre parcours"
+        },
+        {
+          "icon": "users",
+          "title": "Accompagnement Personnalisé",
+          "description": "Des formateurs expérimentés vous guident tout au long de la formation"
+        },
+        {
+          "icon": "briefcase",
+          "title": "Projets Pratiques",
+          "description": "Travaillez sur des projets réels adaptés au contexte africain"
+        },
+        {
+          "icon": "clock",
+          "title": "Flexibilité",
+          "description": "Formation en présentiel et à distance selon vos disponibilités"
+        }
+      ]
+    },
+    "modules": [
+      {
+        "id": 1,
+        "title": "Fondamentaux de l'IA",
+        "description": "Introduction à l'intelligence artificielle, historique et concepts de base",
+        "duration": "2 semaines",
+        "level": "Débutant"
+      },
+      {
+        "id": 2,
+        "title": "Python pour l'IA",
+        "description": "Maîtrisez Python et les bibliothèques essentielles (NumPy, Pandas, Matplotlib)",
+        "duration": "3 semaines",
+        "level": "Débutant"
+      },
+      {
+        "id": 3,
+        "title": "Machine Learning",
+        "description": "Algorithmes de ML, régression, classification, clustering",
+        "duration": "4 semaines",
+        "level": "Intermédiaire"
+      },
+      {
+        "id": 4,
+        "title": "Deep Learning",
+        "description": "Réseaux de neurones, CNN, RNN, TensorFlow et PyTorch",
+        "duration": "4 semaines",
+        "level": "Avancé"
+      },
+      {
+        "id": 5,
+        "title": "NLP & Chatbots",
+        "description": "Traitement du langage naturel et création de chatbots intelligents",
+        "duration": "3 semaines",
+        "level": "Avancé"
+      },
+      {
+        "id": 6,
+        "title": "Projet Final",
+        "description": "Réalisez un projet complet d'IA avec présentation devant un jury",
+        "duration": "4 semaines",
+        "level": "Expert"
+      }
+    ],
+    "pricing": {
+      "title": "Tarifs",
+      "plans": [
+        {
+          "name": "Standard",
+          "price": "150 000",
+          "currency": "FCFA",
+          "duration": "Paiement unique",
+          "features": [
+            "Accès à tous les modules",
+            "Support pédagogique",
+            "Certificat de fin de formation",
+            "Accès aux ressources en ligne"
+          ],
+          "popular": false
+        },
+        {
+          "name": "Premium",
+          "price": "250 000",
+          "currency": "FCFA",
+          "duration": "Paiement unique",
+          "features": [
+            "Tout le plan Standard",
+            "Coaching individuel (5h)",
+            "Projets avancés",
+            "Accès à vie aux mises à jour",
+            "Réseau d'alumni"
+          ],
+          "popular": true
+        }
+      ]
+    },
+    "contact": {
+      "title": "Contactez-nous",
+      "address": "Ouagadougou, Burkina Faso",
+      "phone": "+226 70 00 00 00",
+      "email": "contact@formation-ia-bf.com",
+      "hours": "Lundi - Vendredi: 8h - 18h"
+    },
+    "testimonials": [
+      {
+        "name": "Ibrahim Ouédraogo",
+        "role": "Data Analyst",
+        "content": "Cette formation a transformé ma carrière. J'ai pu décrocher un poste dans une entreprise internationale grâce aux compétences acquises.",
+        "avatar": "/images/avatar1.jpg"
+      },
+      {
+        "name": "Fatima Zongo",
+        "role": "Ingénieure Logicielle",
+        "content": "Les formateurs sont excellents et les projets pratiques m'ont permis de comprendre concrètement l'application de l'IA.",
+        "avatar": "/images/avatar2.jpg"
+      },
+      {
+        "name": "Moussa Traoré",
+        "role": "Entrepreneur",
+        "content": "J'ai créé ma propre startup IA grâce à cette formation. L'accompagnement personnalisé fait toute la différence.",
+        "avatar": "/images/avatar3.jpg"
+      }
+    ],
+    "stats": {
+      "students": "500+",
+      "satisfaction": "98%",
+      "employmentRate": "85%",
+      "hoursContent": "200h"
+    }
+  },
+  "admin": {
+    "password": "admin123",
+    "secret": "formation-ia-burkina-secret-key-2024"
+  }
+}
