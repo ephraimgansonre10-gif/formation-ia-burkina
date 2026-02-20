@@ -10,21 +10,25 @@ import Pricing from '@/components/Pricing'
 import Testimonials from '@/components/Testimonials'
 import Contact from '@/components/Contact'
 import Footer from '@/components/Footer'
-import { createClient } from '@supabase/supabase-js'
+import data from '../../data.json'
 
-// Initialisation du client Supabase côté client
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-const supabase = createClient(supabaseUrl, supabaseAnonKey)
+export default function Home() {
+  const content = data.content
 
-interface ContentData {
-  hero: { title: string; subtitle: string; description: string; cta: string }
-  about: { title: string; description: string; features: Array<{ icon: string; title: string; description: string }> }
-  modules: Array<{ id: number; title: string; description: string; duration: string; level: string }>
-  pricing: { title: string; plans: Array<{ name: string; price: string; currency: string; duration: string; features: string[]; popular: boolean }> }
-  contact: { title: string; address: string; phone: string; email: string; hours: string }
-  testimonials: Array<{ name: string; role: string; content: string; avatar: string }>
-  stats: { students: string; satisfaction: string; employmentRate: string; hoursContent: string }
+  return (
+    <main>
+      <Navbar />
+      <Hero data={content.hero} />
+      <Stats data={content.stats} />
+      <About data={content.about} />
+      <Modules data={content.modules} />
+      {/* Modification de l'ordre cognitif : Preuve sociale AVANT l'offre financière */}
+      <Testimonials data={content.testimonials} />
+      <Pricing data={content.pricing} />
+      <Contact data={content.contact} />
+      <Footer />
+    </main>
+  )
 }
 
 const defaultContent: ContentData = {

@@ -1,25 +1,45 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+
+  // Effet pour détecter le scroll et changer le style de la navbar
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20)
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  // Empêcher le scroll du body quand le menu mobile est ouvert
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+  }, [isOpen])
 
   const navLinks = [
     { href: '#about', label: 'À propos' },
     { href: '#modules', label: 'Programme' },
+    { href: '#testimonials', label: 'Témoignages' },
     { href: '#pricing', label: 'Tarifs' },
-    { href: '#contact', label: 'Contact' },
   ]
 
+  const closeMenu = () => setIsOpen(false)
+
   return (
-    <nav className="navbar">
+    <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
       <div className="navbar-inner">
-        <a href="/" className="logo">
+        <a href="/" className="logo" onClick={closeMenu}>
           <div className="logo-icon">IA</div>
           <span className="logo-text">Formation IA Burkina</span>
         </a>
 
+        {/* Menu Desktop */}
         <ul className="nav-links">
           {navLinks.map(link => (
             <li key={link.href}>
@@ -27,15 +47,17 @@ export default function Navbar() {
             </li>
           ))}
           <li>
-            <a href="/admin" className="nav-btn">Admin</a>
+            <a href="/admin/login" className="nav-btn">Espace Admin</a>
           </li>
         </ul>
 
+        {/* Bouton Hamburger Mobile */}
         <button 
           className="mobile-menu-btn"
           onClick={() => setIsOpen(!isOpen)}
+          aria-label="Menu"
         >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             {isOpen ? (
               <path d="M18 6L6 18M6 6l12 12" />
             ) : (
@@ -45,34 +67,29 @@ export default function Navbar() {
         </button>
       </div>
 
+      {/* Menu Mobile Overlay */}
       {isOpen && (
-        <div style={{ 
-          padding: '20px', 
-          borderTop: '1px solid #eee',
-          background: 'white' 
-        }}>
-          {navLinks.map(link => (
+        <div className="mobile-menu-overlay">
+          <div className="mobile-menu-content">
+            {navLinks.map(link => (
+              <a 
+                key={link.href}
+                href={link.href} 
+                className="mobile-link"
+                onClick={closeMenu}
+              >
+                {link.label}
+              </a>
+            ))}
+            <div className="mobile-menu-divider"></div>
             <a 
-              key={link.href}
-              href={link.href} 
-              style={{ 
-                display: 'block', 
-                padding: '10px 0',
-                color: '#555',
-                textDecoration: 'none'
-              }}
-              onClick={() => setIsOpen(false)}
+              href="/admin/login" 
+              className="mobile-btn-primary"
+              onClick={closeMenu}
             >
-              {link.label}
+              Espace Admin
             </a>
-          ))}
-          <a 
-            href="/admin" 
-            className="nav-btn"
-            style={{ display: 'inline-block', marginTop: '10px' }}
-          >
-            Admin
-          </a>
+          </div>
         </div>
       )}
     </nav>

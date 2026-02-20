@@ -608,29 +608,118 @@ h1, h2, h3, h4 {
 }
 
 @media (max-width: 768px) {
-  .navbar-inner { height: 64px; }
+  .navbar-inner { height: 72px; padding: 0 20px; }
   .nav-links { display: none; }
-  .mobile-menu-btn { display: block; font-size: 24px; }
+  .mobile-menu-btn { display: block; font-size: 28px; }
   
-  .hero { padding: 120px 24px 60px; min-height: auto;}
-  .hero h1 { font-size: 36px; }
-  .hero h2 { font-size: 18px; }
-  .hero p { font-size: 16px; }
-  .hero-buttons { flex-direction: column; width: 100%; }
-  .btn-white, .btn-outline { width: 100%; text-align: center; }
+  .hero { padding: 140px 20px 60px; min-height: auto;}
+  .hero h1 { font-size: 40px; }
+  .hero h2 { font-size: 20px; }
+  .hero p { font-size: 16px; margin-bottom: 32px; }
+  .hero-buttons { flex-direction: column; width: 100%; gap: 16px; }
+  .btn-white, .btn-outline { width: 100%; text-align: center; padding: 18px; font-size: 16px; }
   .hero-form .input-group { flex-direction: column; }
+  .hero-form button { padding: 16px; }
   
-  .stats-inner, .features-grid, .modules-grid, .pricing-grid, .testimonials-grid, .contact-grid, .footer-grid { grid-template-columns: 1fr; }
-  .section { padding: 80px 24px; }
+  .stats-inner { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .stat-item { padding: 16px; }
+  .stat-value { font-size: 32px; }
+  .stat-label { font-size: 13px; }
+
+  .features-grid, .modules-grid, .pricing-grid, .testimonials-grid, .contact-grid, .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+  .section { padding: 80px 20px; }
+  .section-title { margin-bottom: 40px; }
+  .section-title h2 { font-size: 32px; }
+  
   .price-card { padding: 32px 24px; }
+  .contact-form { padding: 32px 24px; }
+  .form-row { grid-template-columns: 1fr; gap: 16px; }
   
-  .admin-header-inner { padding: 0 16px; height: 60px; }
-  .admin-main { padding: 24px 16px; }
-  .admin-tabs { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; border: none; background: transparent; }
+  .admin-header-inner { padding: 0 16px; height: 64px; }
+  .admin-main { padding: 24px 16px; grid-template-columns: 1fr; gap: 24px; }
+  .admin-tabs { position: static; flex-direction: row; flex-wrap: nowrap; overflow-x: auto; padding-bottom: 8px; border: none; background: transparent; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  .admin-tabs::-webkit-scrollbar { display: none; }
   .admin-tab { white-space: nowrap; background: var(--bg-white); border: 1px solid var(--border-light); }
   .admin-field-row { grid-template-columns: 1fr; gap: 16px; }
-  .admin-card { padding: 24px; }
+  .admin-card { padding: 24px 16px; }
   
   .admin-save-section { padding: 16px; }
-  .admin-save-btn { width: 100%; }
+  .admin-save-btn { width: 100%; padding: 16px; }
+}
+
+/* ==========================================
+   MENU MOBILE FIXE ET FLUIDE
+   ========================================== */
+.mobile-menu-overlay {
+  position: absolute;
+  top: 72px; /* Hauteur de la navbar */
+  left: 0;
+  right: 0;
+  height: 100vh;
+  background: var(--bg-white);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  animation: slideDownMenu 0.3s ease-out forwards;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  border-top: 1px solid var(--border-light);
+}
+
+.mobile-menu-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mobile-link {
+  display: block;
+  padding: 16px 20px;
+  color: var(--text-dark);
+  font-size: 18px;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: var(--radius-md);
+  background: var(--bg-light);
+  transition: var(--transition);
+}
+
+.mobile-link:active {
+  background: var(--border-light);
+  transform: scale(0.98);
+}
+
+.mobile-menu-divider {
+  height: 1px;
+  background: var(--border-light);
+  margin: 12px 0;
+}
+
+.mobile-btn-primary {
+  display: block;
+  text-align: center;
+  padding: 18px;
+  background: var(--primary);
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: var(--radius-md);
+  margin-top: 8px;
+  transition: var(--transition);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.2);
+}
+
+.mobile-btn-primary:active {
+  transform: scale(0.98);
+}
+
+@keyframes slideDownMenu {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
