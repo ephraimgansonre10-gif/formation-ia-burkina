@@ -20,8 +20,8 @@ export default function Navbar() {
   ]
 
   return (
-    <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
-      <div className="navbar-inner">
+    <nav className={`navbar ${scrolled ? 'scrolled' : ''}`} style={{ position: 'fixed', width: '100%', zIndex: 50000 }}>
+      <div className="navbar-inner" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
         <a href="/" className="logo" onClick={() => setIsOpen(false)}>
           <div className="logo-icon">IA</div>
           <span className="logo-text">Formation IA Burkina</span>
@@ -39,14 +39,21 @@ export default function Navbar() {
           </li>
         </ul>
 
-        {/* Bouton Hamburger Mobile */}
+        {/* Bouton Hamburger Mobile Force Visible */}
         <button 
           className="mobile-menu-btn"
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Menu"
-          style={{ display: 'block' }} // Forcer l'affichage sur mobile
+          style={{ 
+            display: 'block', 
+            background: 'transparent',
+            border: 'none',
+            padding: '10px',
+            cursor: 'pointer',
+            zIndex: 50001
+          }}
         >
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#0F172A" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             {isOpen ? (
               <path d="M18 6L6 18M6 6l12 12" />
             ) : (
@@ -56,21 +63,20 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Menu Mobile */}
+      {/* Menu Mobile Forcé */}
       {isOpen && (
         <div style={{
           position: 'fixed',
           top: '72px',
           left: 0,
           right: 0,
+          height: '100vh',
           background: 'white',
           padding: '24px',
-          boxShadow: '0 20px 40px rgba(0,0,0,0.1)',
-          borderTop: '1px solid #E2E8F0',
           display: 'flex',
           flexDirection: 'column',
-          gap: '12px',
-          zIndex: 999
+          gap: '16px',
+          zIndex: 49999
         }}>
           {navLinks.map(link => (
             <a 
@@ -79,13 +85,14 @@ export default function Navbar() {
               onClick={() => setIsOpen(false)}
               style={{
                 display: 'block',
-                padding: '16px 20px',
+                padding: '20px',
                 color: '#0F172A',
                 fontSize: '18px',
-                fontWeight: '600',
+                fontWeight: '700',
                 textDecoration: 'none',
                 background: '#F8FAFC',
-                borderRadius: '12px'
+                borderRadius: '12px',
+                border: '1px solid #E2E8F0'
               }}
             >
               {link.label}
@@ -97,14 +104,15 @@ export default function Navbar() {
             style={{
               display: 'block',
               textAlign: 'center',
-              padding: '18px',
+              padding: '20px',
               background: '#2563EB',
               color: 'white',
-              fontSize: '16px',
-              fontWeight: '700',
+              fontSize: '18px',
+              fontWeight: '800',
               textDecoration: 'none',
               borderRadius: '12px',
-              marginTop: '12px'
+              marginTop: '16px',
+              boxShadow: '0 10px 25px rgba(37, 99, 235, 0.3)'
             }}
           >
             Espace Admin
