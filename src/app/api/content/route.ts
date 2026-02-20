@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { revalidatePath } from 'next/cache'
 import { supabase } from '@/lib/supabase'
 
 export async function GET() {
@@ -50,6 +51,8 @@ export async function POST(request: NextRequest) {
       console.error('Supabase error:', error)
       return NextResponse.json({ error: 'Erreur lors de la sauvegarde' }, { status: 500 })
     }
+    
+    revalidatePath('/', 'layout')
     
     return NextResponse.json({ success: true })
   } catch (error) {

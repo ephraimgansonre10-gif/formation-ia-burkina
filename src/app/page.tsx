@@ -10,7 +10,8 @@ import Footer from '@/components/Footer'
 import { supabase } from '@/lib/supabase'
 import fallbackData from '../../data.json'
 
-export const revalidate = 0 // Toujours récupérer les données fraîches depuis Supabase
+export const revalidate = 0
+export const dynamic = 'force-dynamic'
 
 export default async function Home() {
   let content = fallbackData.content
